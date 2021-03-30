@@ -1,0 +1,60 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /ska
+logging:
+  level:
+    root: info
+k-topic:
+        name: wjm-sysMonitor-test07
+        partitions-num: 3
+        replication-factor: 3
+
+spring:
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT-8
+  kafka:
+    #bootstrap-servers: mypc:19092
+    bootstrap-servers: 192.168.3.102:9092,192.168.3.103:9092,192.168.3.104:9092
+    listener:
+      missing-topics-fatal: false
+    properties:
+      schema.registry.url: http://127.0.0.1:19191
+    producer:
+      retries: 3 #重试次数
+      acks: 1
+      batch-size: 16384 #16kb
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer #io.confluent.kafka.serializers.KafkaAvroSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      properties:
+        interceptor.classes: io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor
+        linger:
+          ms: 10 #每是10 毫秒提交一次
+    consumer:
+      group-id: wjm-sysMonitor-test
+      enable-auto-commit: true #自动提交
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer #io.confluent.kafka.serializers.KafkaAvroDeserializer
+      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      auto-offset-reset: latest #在新位置开始读取
+      auto.commit:
+        interval:
+          ms: 1000 #提交延时
+      properties:
+        specific.avro.reader: true
+        interceptor.classes: io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor
+        session: #心跳超时时间
+          timeout:
+            ms: 120000
+        request: #请求超时时间
+          timeout:
+              ms: 10000
+
+
+
+

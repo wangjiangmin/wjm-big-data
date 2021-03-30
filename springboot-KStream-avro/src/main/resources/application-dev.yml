@@ -1,0 +1,74 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /sksa
+logging:
+  level:
+    root: info
+
+k-topic:
+        name: wjm-sysMonitor-test07
+        partitions-num: 3
+        replication-factor: 3
+
+spring:
+  application:
+    name: springboot-KStream-avro
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT-8
+
+  kafka:
+    listener:
+      missing-topics-fatal: false
+    streams:
+      application-id: sksa-test01 #应用id
+      bootstrap-servers: 192.168.3.102:9092,192.168.3.103:9092,192.168.3.104:9092 #kafka 服务器地址集
+      client-id: sksa-client #应用连接id
+      cache.max.bytes.buffering: 0
+      commit.interval.ms: 0
+      properties:
+        schema.registry.url: http://127.0.0.1:19191
+        default:
+          key:
+            serde: org.apache.kafka.common.serialization.Serdes$StringSerde # 序列化key
+            #serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde # 序列化key
+          value:
+            #serde: org.springframework.kafka.support.serializer.JsonSerde # 序列化value
+            serde: io.confluent.kafka.streams.serdes.avro.GenericAvroSerde
+            #serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+          timestamp:
+            extractor: org.apache.kafka.streams.processor.WallclockTimestampExtractor
+      listener:
+        missing-topics-fatal: false # 消费端监听的topic不存在时，项目启动会报错(关掉)
+        schema.registry.url: http://127.0.0.1:19191
+
+
+management:
+  metrics:
+    binders:
+      files:
+        enabled: false
+      integration:
+        enabled: false
+      jvm:
+        enabled: true
+      tomcat:
+        enabled: false
+      logback:
+        enabled: false
+      processor:
+        enabled: false
+      uptime:
+        enabled: false
+  endpoints:
+    web:
+      exposure:
+        include[0]: prometheus #打开prometheus的数据获取端口 http://127.0.0.1:8082/actuator/prometheus
+      base-path: /
+

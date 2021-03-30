@@ -1,0 +1,42 @@
+{
+  "namespace": "springbootKafkaAvro.avro",
+  "type": "record",
+  "name": "UserLogs",
+  "fields": [
+    {
+      "name": "userID",
+      "type": "string",
+      "avro.java.string": "String"
+    },
+    {
+      "name": "ip",
+      "type": "string",
+      "avro.java.string": "String"
+    },
+    {
+      "name": "sysName",
+      "type": "string",
+      "avro.java.string": "String"
+    },
+    {
+      "name": "url",
+      "type": "string",
+      "avro.java.string": "String"
+    },
+    {
+      "name": "date",
+      "type": "string",
+      "avro.java.string": "String"
+    },
+    {
+      "name": "deviceType",
+      "type": "string",
+      "avro.java.string": "String"
+    },{
+           "name": "uuid",
+           "type": "string",
+           "avro.java.string": "String"
+         }
+    
+  ]
+}
