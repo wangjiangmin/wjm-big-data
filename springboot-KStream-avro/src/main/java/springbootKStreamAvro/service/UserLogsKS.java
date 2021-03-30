@@ -31,7 +31,7 @@ public class UserLogsKS {
     @Bean
     public KStream<String, UserLogs> statisticsLogs(StreamsBuilder streamBuilder){
 
-        KStream<String, UserLogs> stream = streamBuilder.stream(TOPIC, Consumed.with(StringSerde,UserLogs));
+        KStream<String, UserLogs> stream = streamBuilder.stream(TOPIC);
 
 //        GenericAvroSerde
 

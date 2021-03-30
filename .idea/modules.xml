@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/wjm-big-data.iml" filepath="$PROJECT_DIR$/.idea/wjm-big-data.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springboot-KStream-avro/springboot-KStream-avro.iml" filepath="$PROJECT_DIR$/springboot-KStream-avro/springboot-KStream-avro.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springboot-kafka-avro/springboot-kafka-avro.iml" filepath="$PROJECT_DIR$/springboot-kafka-avro/springboot-kafka-avro.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wjm-big-data.iml" filepath="$PROJECT_DIR$/wjm-big-data.iml" />
     </modules>
   </component>
 </project>
