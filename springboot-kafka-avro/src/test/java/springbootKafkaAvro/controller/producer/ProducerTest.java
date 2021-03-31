@@ -28,7 +28,7 @@ public class ProducerTest extends TestMain {
 
             System.out.println("发送请求>>>" );
             buildGet("/userLogsSend/send", map);
-            Thread.sleep(1000);
+            Thread.sleep(100);
         }
 
 

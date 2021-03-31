@@ -31,12 +31,13 @@ spring:
       bootstrap-servers: 192.168.3.102:9092,192.168.3.103:9092,192.168.3.104:9092 #kafka 服务器地址集
       client-id: sksa-client #应用连接id
       cache.max.bytes.buffering: 0
-      commit.interval.ms: 0
+      commit.interval.ms: 1000
       properties:
         schema.registry.url: http://127.0.0.1:19191
         default:
           key:
             serde: org.apache.kafka.common.serialization.Serdes$StringSerde # 序列化key
+#            serde: io.confluent.kafka.streams.serdes.avro.GenericAvroSerde
             #serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde # 序列化key
           value:
             #serde: org.springframework.kafka.support.serializer.JsonSerde # 序列化value
